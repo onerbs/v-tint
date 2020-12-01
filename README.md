@@ -2,6 +2,14 @@
 
 Colorize your terminal output *!*
 
+## Installation
+
+Use `v` to install this module:
+
+	v install onerbs.tint
+
+## API
+
 The available colors are:
 
 	black
@@ -29,7 +37,7 @@ The available modes are:
 
 ## Usage
 
-> always `import tint`
+> always `import onerbs.tint`
 
 Print a bold red text over yellow:
 
