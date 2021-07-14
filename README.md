@@ -1,12 +1,14 @@
-# Tint
+# tint
 
 Colorize your terminal output *!*
+
 
 ## Installation
 
 Use `v` to install this module:
 
 	v install onerbs.tint
+
 
 ## API
 
@@ -35,13 +37,14 @@ The available modes are:
 	hide
 	strike
 
-## Usage
 
-> always `import onerbs.tint`
+## Example
 
-Print a bold red text over yellow:
+This will print a bold red text over yellow:
 
-``` v
+``` V
+import onerbs.tint
+
 println(tint.red('text').over_yellow().bold())
 println(tint.over_yellow('text').bold().red())
 println(tint.bold('text').red().over_yellow())
