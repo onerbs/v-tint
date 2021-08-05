@@ -2,9 +2,8 @@ module tint
 
 import strings
 
-[heap]
 struct Tint {
-	str &byte = 0
+	str &byte
 	len int
 mut:
 	fore byte   = 9
@@ -20,6 +19,10 @@ fn tint(s string) Tint {
 }
 
 pub fn (self Tint) str() string {
+	if self.len == 0 {
+		return ''
+	}
+
 	mut buf := strings.new_builder(self.len + 0x20)
 
 	buf << `\e`
@@ -53,145 +56,168 @@ pub fn (self Tint) str() string {
 
 	unsafe { buf.write_ptr(self.str, self.len) }
 
-	if buf.len > self.len {
-		buf << `\e`
-		buf << `[`
-		buf << `0`
-		buf << `m`
-	}
+	buf << `\e`
+	buf << `[`
+	buf << `0`
+	buf << `m`
 
 	return buf.str()
 }
 
 // Foreground
 
-pub fn (mut self Tint) black() Tint {
-	self.fore = 0
-	return self
+pub fn (self Tint) black() Tint {
+	mut tt := self
+	tt.fore = 0
+	return tt
 }
 
-pub fn (mut self Tint) red() Tint {
-	self.fore = 1
-	return self
+pub fn (self Tint) red() Tint {
+	mut tt := self
+	tt.fore = 1
+	return tt
 }
 
-pub fn (mut self Tint) green() Tint {
-	self.fore = 2
-	return self
+pub fn (self Tint) green() Tint {
+	mut tt := self
+	tt.fore = 2
+	return tt
 }
 
-pub fn (mut self Tint) yellow() Tint {
-	self.fore = 3
-	return self
+pub fn (self Tint) yellow() Tint {
+	mut tt := self
+	tt.fore = 3
+	return tt
 }
 
-pub fn (mut self Tint) blue() Tint {
-	self.fore = 4
-	return self
+pub fn (self Tint) blue() Tint {
+	mut tt := self
+	tt.fore = 4
+	return tt
 }
 
-pub fn (mut self Tint) magenta() Tint {
-	self.fore = 5
-	return self
+pub fn (self Tint) magenta() Tint {
+	mut tt := self
+	tt.fore = 5
+	return tt
 }
 
-pub fn (mut self Tint) cyan() Tint {
-	self.fore = 6
-	return self
+pub fn (self Tint) cyan() Tint {
+	mut tt := self
+	tt.fore = 6
+	return tt
 }
 
-pub fn (mut self Tint) white() Tint {
-	self.fore = 7
-	return self
+pub fn (self Tint) white() Tint {
+	mut tt := self
+	tt.fore = 7
+	return tt
 }
 
 // Background
 
-pub fn (mut self Tint) over_black() Tint {
-	self.back = 0
-	return self
+pub fn (self Tint) over_black() Tint {
+	mut tt := self
+	tt.back = 0
+	return tt
 }
 
-pub fn (mut self Tint) over_red() Tint {
-	self.back = 1
-	return self
+pub fn (self Tint) over_red() Tint {
+	mut tt := self
+	tt.back = 1
+	return tt
 }
 
-pub fn (mut self Tint) over_green() Tint {
-	self.back = 2
-	return self
+pub fn (self Tint) over_green() Tint {
+	mut tt := self
+	tt.back = 2
+	return tt
 }
 
-pub fn (mut self Tint) over_yellow() Tint {
-	self.back = 3
-	return self
+pub fn (self Tint) over_yellow() Tint {
+	mut tt := self
+	tt.back = 3
+	return tt
 }
 
-pub fn (mut self Tint) over_blue() Tint {
-	self.back = 4
-	return self
+pub fn (self Tint) over_blue() Tint {
+	mut tt := self
+	tt.back = 4
+	return tt
 }
 
-pub fn (mut self Tint) over_magenta() Tint {
-	self.back = 5
-	return self
+pub fn (self Tint) over_magenta() Tint {
+	mut tt := self
+	tt.back = 5
+	return tt
 }
 
-pub fn (mut self Tint) over_cyan() Tint {
-	self.back = 6
-	return self
+pub fn (self Tint) over_cyan() Tint {
+	mut tt := self
+	tt.back = 6
+	return tt
 }
 
-pub fn (mut self Tint) over_white() Tint {
-	self.back = 7
-	return self
+pub fn (self Tint) over_white() Tint {
+	mut tt := self
+	tt.back = 7
+	return tt
 }
 
 // Modes
 
-pub fn (mut self Tint) bold() Tint {
-	self.mode[0] = !self.mode[0]
-	return self
+pub fn (self Tint) bold() Tint {
+	mut tt := self
+	tt.mode[0] = !self.mode[0]
+	return tt
 }
 
-pub fn (mut self Tint) faint() Tint {
-	self.mode[1] = !self.mode[1]
-	return self
+pub fn (self Tint) faint() Tint {
+	mut tt := self
+	tt.mode[1] = !self.mode[1]
+	return tt
 }
 
-pub fn (mut self Tint) italic() Tint {
-	self.mode[2] = !self.mode[2]
-	return self
+pub fn (self Tint) italic() Tint {
+	mut tt := self
+	tt.mode[2] = !self.mode[2]
+	return tt
 }
 
-pub fn (mut self Tint) underline() Tint {
-	self.mode[3] = !self.mode[3]
-	return self
+pub fn (self Tint) underline() Tint {
+	mut tt := self
+	tt.mode[3] = !self.mode[3]
+	return tt
 }
 
-pub fn (mut self Tint) blink() Tint {
-	self.mode[4] = !self.mode[4]
-	return self
+pub fn (self Tint) blink() Tint {
+	mut tt := self
+	tt.mode[4] = !self.mode[4]
+	return tt
 }
 
-pub fn (mut self Tint) rapid_blink() Tint {
-	self.mode[5] = !self.mode[5]
-	return self
+pub fn (self Tint) rapid_blink() Tint {
+	mut tt := self
+	tt.mode[5] = !self.mode[5]
+	return tt
 }
 
-pub fn (mut self Tint) invert() Tint {
-	self.mode[6] = !self.mode[6]
-	return self
+pub fn (self Tint) invert() Tint {
+	mut tt := self
+	tt.mode[6] = !self.mode[6]
+	return tt
 }
 
-pub fn (mut self Tint) hide() Tint {
-	self.mode[7] = !self.mode[7]
-	return self
+pub fn (self Tint) hide() Tint {
+	mut tt := self
+	tt.mode[7] = !self.mode[7]
+	return tt
 }
 
-pub fn (mut self Tint) strike() Tint {
-	self.mode[8] = !self.mode[8]
-	return self
+pub fn (self Tint) strike() Tint {
+	mut tt := self
+	tt.mode[8] = !self.mode[8]
+	return tt
 }
 
 // Foreground
